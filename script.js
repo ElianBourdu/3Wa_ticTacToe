@@ -14,29 +14,41 @@ let count = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     const arrayOfButton = Array.from(document.getElementsByTagName("button"));
-    console.log(arrayOfButton)
+    console.log(arrayOfButton);
     arrayOfButton.forEach(button => {
         const onclick = () => {
             button.removeEventListener('click', onclick);
-            count++;
-            console.log(count);
+            
+            // check if a player win after each click
+            const checkIfPlayerWin = (sign) => {
+                for (let i = 0; i < checkWin.length; i++) {
+                    console.log(`${i}: ${arrayOfButton[i].innerHTML}`)
+                    if (arrayOfButton[checkWin[i][0]].innerHTML === sign && arrayOfButton[checkWin[i][1]].innerHTML === sign && arrayOfButton[checkWin[i][2]].innerHTML === sign) {
+                        if (sign === "o") {
+                            console.log("player 1 won");
+                        }
+                        else if (sign === "x") {
+                            console.log("player 2 won");
+                        }
+                    }
+                }
+            };
+            
+            // handling each value assigned regarding which player clicked
             if (count % 2 === 0) {
                 // even
                 button.innerText = "o";
+                console.log("joueur 1")
+                checkIfPlayerWin("o");
             }
             else if (count % 2 === 1) {
                 // odd
                 button.innerText = "x";
+                console.log("joueur 2")
+                checkIfPlayerWin("x");
             }
-
-            // check if a player win after each click
-            // const checkIfPlayerWin = (sign) => {
-            //     for (let i = 0; i < checkWin.length; i++) {
-            //         if (checkWin[i]) {
-
-            //         }
-            //     }
-            // };
+            count++;
+            console.log(count);
         };
         button.addEventListener('click', onclick);
     });
